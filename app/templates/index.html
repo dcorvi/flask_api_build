@@ -1,5 +1,51 @@
 {% extends 'base.html' %}
 
 {% block app_content %}
-  <h1>Index</h1>
+  {% if response %}
+    <!-- cards for information to be rendered -->
+    <div class="container" id="weather-info">
+      <h2 id="city_name">{{ response.name }}, {{ response.sys.country}}</h2>
+
+      <!-- create the first card which renders high temp -->
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <div class="card">
+            <div class="card-title badge-danger">High</div>
+            <div class="card-text" id="high">{{response.main.temp_max|round|int}}&deg;</div>
+          </div> <!-- ends card -->
+        </div> <!-- ends col 4 -->
+      </div> <!-- ends row for card 1 -->
+
+      <!-- create the second card which renders low temp -->
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <div class="card">
+            <div class="card-title badge-primary">Low</div>
+            <div class="card-text" id="low">{{ response.main.temp_min|round|int}}&deg;</div>
+          </div> <!-- ends card -->
+        </div> <!-- ends col 4 -->
+      </div> <!-- ends row for card 2 -->
+
+      <!-- create the third card which renders forecast -->
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <div class="card">
+            <div class="card-title badge-info">Forecast</div>
+            <div class="card-text" id="forecast">{{ response.weather[0].main}}</div>
+          </div> <!-- ends card -->
+        </div> <!-- ends col 4 -->
+      </div> <!-- ends row for card 3 -->
+
+      <!-- create the fourth card which renders humidity -->
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <div class="card">
+            <div class="card-title badge-success">Humidity</div>
+            <div class="card-text" id="humidity">{{ response.main.humidity}}%</div>
+          </div> <!-- ends card -->
+        </div> <!-- ends col 4 -->
+      </div> <!-- ends row for card 4 -->
+
+    </div> <!-- ends container -->
+  {% endif %}
 {% endblock %}
